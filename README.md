@@ -1,59 +1,61 @@
-# Proejct
+# ConsultorSPA - Gerenciamento de Consultores
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+Este é um projeto de Single Page Application (SPA) desenvolvido com Angular para o gerenciamento de consultores.
 
-## Development server
+## Visão Geral do Projeto
 
-To start a local development server, run:
+O objetivo principal é fornecer uma interface para realizar operações de CRUD (Create, Read, Update, Delete) para uma lista de consultores. A arquitetura do projeto foi planejada para ser moderna, escalável e de fácil manutenção, utilizando as práticas mais recentes do ecossistema Angular.
+
+## Detalhes Técnicos
+
+*   **Framework**: [Angular](https://angular.dev/)
+*   **Arquitetura**: **Standalone Components**. O projeto utiliza a arquitetura baseada em componentes standalone, que simplifica a estrutura da aplicação, eliminando a necessidade de `NgModules` na maioria dos casos.
+*   **Roteamento**: O roteamento é configurado para carregar componentes de forma preguiçosa (*Lazy Loading*) usando `loadComponent`, o que melhora o desempenho inicial da aplicação.
+*   **Estilização**: CSS puro e modularizado por componente.
+*   **Modelagem de Dados**: As interfaces para os modelos de dados (como `Consultor` e `AreaDeAtuacao`) estão localizadas em `src/app/models`.
+
+## Servidor de Desenvolvimento
+
+Para iniciar o servidor de desenvolvimento local, execute o comando abaixo e acesse `http://localhost:4200/` no seu navegador.
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O aplicativo será recarregado automaticamente se você alterar qualquer um dos arquivos de origem.
 
-## Code scaffolding
+## Comandos Úteis do Angular CLI
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+O Angular CLI inclui ferramentas poderosas para auxiliar no desenvolvimento.
 
-```bash
-ng generate component component-name
-```
+### Gerando Novos Componentes
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para gerar um novo componente, execute:
 
 ```bash
-ng generate --help
+ng generate component nome-do-componente
 ```
 
-## Building
+Você também pode usar outros esquemas como `directive`, `pipe`, `service`, `class`, `guard`, `interface`, `enum` e `module`.
 
-To build the project run:
+### Construindo o Projeto (Build)
+
+Para compilar e construir o projeto para produção, execute:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Os artefatos da compilação serão armazenados no diretório `dist/`.
 
-## Running unit tests
+### Executando Testes Unitários
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Para executar os testes unitários com o [Karma](https://karma-runner.github.io), use o comando:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Recursos Adicionais
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para mais informações sobre o Angular CLI, visite a [documentação oficial](https://angular.dev/tools/cli).
