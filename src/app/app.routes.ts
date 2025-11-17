@@ -1,11 +1,18 @@
 import { Routes } from '@angular/router';
-import { ConsultorListComponent } from './consultores/consultor-list/consultor-list.component'; // Import the standalone component
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'consultores',
     pathMatch: 'full'
+  },
+  {
+    path: 'consultores/novo',
+    loadComponent: () => import('./consultores/consultor-form/consultor-form.component').then(c => c.ConsultorFormComponent)
+  },
+  {
+    path: 'consultores/editar/:id', // Nova rota para edição
+    loadComponent: () => import('./consultores/consultor-form/consultor-form.component').then(c => c.ConsultorFormComponent)
   },
   {
     path: 'consultores',

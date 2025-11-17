@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common'; // Importe CommonModule e DatePipe
 import { Consultor } from '../../models/consultor.model';
 import { AreaDeAtuacao } from '../../models/area-de-atuacao.model';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-consultor-list',
   standalone: true, // Marque o componente como standalone
@@ -15,7 +15,7 @@ export class ConsultorListComponent implements OnInit {
   // Dados de exemplo (mock)
   consultores: Consultor[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Exemplo de áreas de atuação
@@ -55,14 +55,12 @@ export class ConsultorListComponent implements OnInit {
   }
 
   adicionarConsultor(): void {
-    console.log('Botão Adicionar Novo clicado!');
-    // Lógica para navegar para o formulário de adição será implementada aqui
+    this.router.navigate(["/consultores/novo"])
   }
 
   editarConsultor(id: string | undefined): void {
     if (!id) return;
-    console.log(`Botão Editar clicado para o consultor com ID: ${id}`);
-    // Lógica para navegar para o formulário de edição será implementada aqui
+    this.router.navigate(['/consultores/editar', id]); // Navega para o formulário de edição com o ID
   }
 
   excluirConsultor(id: string | undefined): void {

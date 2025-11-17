@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2>Criar Novo Consultor</h2>
+  <form [formGroup]="consultorForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Campo Nome Completo -->
+    <div class="form-field">
+      <label for="nome">Nome Completo</label>
+      <input id="nome" formControlName="nome" placeholder="Digite o nome completo">
+      <div *ngIf="consultorForm.controls['nome'].invalid && (consultorForm.controls['nome'].dirty || consultorForm.controls['nome'].touched)" class="error-message">
+        O nome é obrigatório.
+      </div>
+    </div>
+
+    <!-- Campo Email -->
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="exemplo@email.com">
+      <div *ngIf="consultorForm.controls['email'].invalid && (consultorForm.controls['email'].dirty || consultorForm.controls['email'].touched)" class="error-message">
+        <span *ngIf="consultorForm.controls['email'].errors?.['required']">O email é obrigatório.</span>
+        <span *ngIf="consultorForm.controls['email'].errors?.['email']">Formato de email inválido.</span>
+      </div>
+    </div>
+
+    <!-- Campo Telefone -->
+    <div class="form-field">
+      <label for="telefone">Telefone</label>
+      <input id="telefone" formControlName="telefone" placeholder="(99) 99999-9999">
+       <div *ngIf="consultorForm.controls['telefone'].invalid && (consultorForm.controls['telefone'].dirty || consultorForm.controls['telefone'].touched)" class="error-message">
+        O telefone é obrigatório.
+      </div>
+    </div>
+
+    <!-- Campo Área de Atuação -->
+    <div class="form-field">
+      <label for="areaDeAtuacao">Área de Atuação</label>
+      <select id="areaDeAtuacao" formControlName="areaDeAtuacao">
+        <option [ngValue]="null" disabled>Selecione uma área</option>
+        <option *ngFor="let area of areasDeAtuacao" [ngValue]="area.id">{{ area.nome }}</option>
+      </select>
+      <div *ngIf="consultorForm.controls['areaDeAtuacao'].invalid && (consultorForm.controls['areaDeAtuacao'].dirty || consultorForm.controls['areaDeAtuacao'].touched)" class="error-message">
+        A área de atuação é obrigatória.
+      </div>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="consultorForm.invalid">Salvar</button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
