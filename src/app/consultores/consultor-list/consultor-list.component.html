@@ -18,7 +18,7 @@
       <tr *ngFor="let consultor of consultores">
         <td>{{ consultor.nome }}</td>
         <td>{{ consultor.email }}</td>
-        <td>{{ consultor.areaDeAtuacao.nome }}</td>
+        <td>{{ consultor.area_atuacao }}</td>
         <td>{{ consultor.dataDeCriacao | date: 'dd/MM/yyyy' }}</td>
         <td class="actions">
           <button class="edit-button" (click)="editarConsultor(consultor.id)">Editar</button>
