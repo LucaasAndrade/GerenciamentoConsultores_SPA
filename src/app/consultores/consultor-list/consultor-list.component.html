@@ -19,10 +19,10 @@
         <td>{{ consultor.nome }}</td>
         <td>{{ consultor.email }}</td>
         <td>{{ consultor.area_atuacao }}</td>
-        <td>{{ consultor.dataDeCriacao | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ consultor.data_criacao | date: 'dd/MM/yyyy' }}</td>
         <td class="actions">
-          <button class="edit-button" (click)="editarConsultor(consultor.id)">Editar</button>
-          <button class="delete-button" (click)="excluirConsultor(consultor.id)">Excluir</button>
+          <button class="edit-button" (click)="editarConsultor(consultor.id_consultor)">Editar</button>
+          <button class="delete-button" (click)="excluirConsultor(consultor.id_consultor)">Excluir</button>
         </td>
       </tr>
     </tbody>

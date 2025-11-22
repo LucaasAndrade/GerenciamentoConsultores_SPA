@@ -38,15 +38,29 @@ export class ConsultorFormComponent implements OnInit {
     this.currentConsultorId = this.route.snapshot.paramMap.get('id');
     if (this.currentConsultorId) {
       this.isEditMode = true;
-      // Lógica para carregar dados do consultor (usar um serviço)
+      this.consultorService.getConsultorById(this.currentConsultorId).subscribe({
+        next: (consultor) => {
+          this.consultorForm.patchValue(consultor);
+        },
+        error: (error) => {
+          console.error('Erro ao buscar consultor:', error);
+        }
+      });
     }
   }
 
   onSubmit(): void {
     if (this.consultorForm.valid) {
-      if (this.isEditMode) {
-        console.log(`Formulário de EDIÇÃO válido para o ID ${this.currentConsultorId}! Dados:`, this.consultorForm.value);
-        // Lógica para chamar o serviço de update
+      if (this.isEditMode && this.currentConsultorId) {
+        this.consultorService.updateConsultor(this.currentConsultorId, this.consultorForm.value).subscribe({
+          next: (consultor) => {
+            console.log('Consultor atualizado com sucesso:', consultor);
+            this.router.navigate(['/consultores']); // Redireciona para a lista após salvar
+          },
+          error: (error) => {
+            console.error('Erro ao atualizar consultor:', error);
+          }
+        });
       } else {
         this.consultorService.createConsultor(this.consultorForm.value).subscribe({
           next: (consultor) => {

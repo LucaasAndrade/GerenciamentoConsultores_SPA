@@ -15,5 +15,21 @@ export class ConsultorService {
     return this.http.post<Consultor>(this.apiUrl, consultor);
   }
 
-  // You can add other methods like getConsultores, getConsultorById, updateConsultor, deleteConsultor here later
+  getConsultores(): Observable<Consultor[]> {
+    return this.http.get<Consultor[]>(this.apiUrl);
+  }
+
+  deleteConsultor(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getConsultorById(id: string): Observable<Consultor> {
+    return this.http.get<Consultor>(`${this.apiUrl}/${id}`);
+  }
+
+  updateConsultor(id: string, consultor: Consultor): Observable<Consultor> {
+    return this.http.put<Consultor>(`${this.apiUrl}/${id}`, consultor);
+  }
+
+  // You can add other methods like getConsultorById, updateConsultor, deleteConsultor here later
 }

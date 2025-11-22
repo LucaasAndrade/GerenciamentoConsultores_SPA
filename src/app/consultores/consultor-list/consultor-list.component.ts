@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common'; // Importe CommonModule e DatePipe
 import { Consultor } from '../../models/consultor.model';
 import { Router } from '@angular/router';
+import { ConsultorService } from '../consultor.service';
+
 @Component({
   selector: 'app-consultor-list',
   standalone: true, // Marque o componente como standalone
@@ -14,10 +16,20 @@ export class ConsultorListComponent implements OnInit {
   // Dados de exemplo (mock)
   consultores: Consultor[] = [];
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private consultorService: ConsultorService
+  ) { }
 
   ngOnInit(): void {
-    // A ser populado por um serviço
+    this.consultorService.getConsultores().subscribe({
+      next: (consultores) => {
+        this.consultores = consultores;
+      },
+      error: (error) => {
+        console.error('Erro ao buscar consultores:', error);
+      }
+    });
   }
 
   adicionarConsultor(): void {
@@ -31,7 +43,16 @@ export class ConsultorListComponent implements OnInit {
 
   excluirConsultor(id: string | undefined): void {
     if (!id) return;
-    console.log(`Botão Excluir clicado para o consultor com ID: ${id}`);
-    // Lógica para abrir um diálogo de confirmação e excluir o item será implementada aqui
+    if (confirm('Tem certeza que deseja excluir este consultor?')) {
+      this.consultorService.deleteConsultor(id).subscribe({
+        next: () => {
+          this.consultores = this.consultores.filter(c => c.id_consultor !== id);
+          console.log(`Consultor com ID: ${id} excluído com sucesso.`);
+        },
+        error: (error) => {
+          console.error(`Erro ao excluir consultor com ID: ${id}`, error);
+        }
+      });
+    }
   }
 }
