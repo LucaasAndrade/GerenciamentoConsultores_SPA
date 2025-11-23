@@ -1,0 +1,26 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Editar Administrador' : 'Novo Administrador' }}</h2>
+  <form [formGroup]="administradorForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-field">
+      <label for="login">Login</label>
+      <input id="login" formControlName="login" placeholder="Digite o login">
+      <div *ngIf="administradorForm.controls['login'].invalid && (administradorForm.controls['login'].dirty || administradorForm.controls['login'].touched)" class="error-message">
+        O login é obrigatório.
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password" placeholder="Digite a senha">
+      <div *ngIf="administradorForm.controls['password'].invalid && (administradorForm.controls['password'].dirty || administradorForm.controls['password'].touched)" class="error-message">
+        A senha é obrigatória.
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="administradorForm.invalid">Salvar</button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

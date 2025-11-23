@@ -1,0 +1,11 @@
+<div class="main-container">
+  <div class="sidebar" *ngIf="isAuthenticated">
+    <div class="sidebar-header">Admin Panel</div>
+    <a routerLink="/consultores" routerLinkActive="active">Consultores</a>
+    <a routerLink="/administradores" routerLinkActive="active">Administradores</a>
+    <button (click)="logout()" class="logout-button">Logout</button>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

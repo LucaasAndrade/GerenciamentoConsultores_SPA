@@ -1,0 +1,145 @@
+.container {
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.add-button {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.consultor-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.consultor-table th, .consultor-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.consultor-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.consultor-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.consultor-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button, .actions a {
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.edit-button {
+  background-color: #008CBA; /* Azul */
+}
+
+.delete-button {
+  background-color: #f44336; /* Vermelho */
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+  color: #888;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .consultor-table, .consultor-table thead, .consultor-table tbody, .consultor-table th, .consultor-table td, .consultor-table tr {
+    display: block;
+  }
+
+  .consultor-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .consultor-table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
+
+  .consultor-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  .consultor-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .consultor-table td:nth-of-type(1):before { content: "Login"; }
+  .consultor-table td:nth-of-type(2):before { content: "Data de Criação"; }
+  .consultor-table td:nth-of-type(3):before { content: "Último Update"; }
+  .consultor-table td:nth-of-type(4):before { content: "Ações"; }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="header">
+    <h1>Administradores</h1>
+    <a routerLink="/administrador-form" class="add-button">Novo Administrador</a>
+  </div>
+
+  <table class="consultor-table">
+    <thead>
+      <tr>
+        <th>Login</th>
+        <th>Data de Criação</th>
+        <th>Último Update</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let administrador of administradores">
+        <td>{{ administrador.login }}</td>
+        <td>{{ administrador.data_criacao | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ administrador.ultimo_update | date: 'dd/MM/yyyy' }}</td>
+        <td class="actions">
+          <a [routerLink]="['/administrador-form', administrador.id_admin]" class="edit-button">Editar</a>
+          <button (click)="deleteAdministrador(administrador.id_admin!)" class="delete-button">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="administradores.length === 0" class="empty-state">
+    <p>Nenhum administrador cadastrado.</p>
+  </div>
+</div>
+
