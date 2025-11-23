@@ -1,7 +1,10 @@
 <div class="container">
   <div class="header">
     <h1>Consultores</h1>
-    <button class="add-button" (click)="adicionarConsultor()">Adicionar Novo</button>
+    <div class="actions-group">
+      <input type="text" placeholder="Buscar consultor..." [(ngModel)]="searchTerm" (input)="filterConsultores()" class="search-input">
+      <button class="add-button" (click)="adicionarConsultor()">Adicionar Novo</button>
+    </div>
   </div>
 
   <table class="consultor-table">

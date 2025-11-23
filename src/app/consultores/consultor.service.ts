@@ -19,6 +19,10 @@ export class ConsultorService {
     return this.http.get<Consultor[]>(this.apiUrl);
   }
 
+  getConsultoresFilteredByName(name: string): Observable<Consultor[]> {
+    return this.http.get<Consultor[]>(`${this.apiUrl}/filtered/${name}`);
+  }
+
   deleteConsultor(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

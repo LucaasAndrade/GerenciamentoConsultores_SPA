@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common'; // Importe CommonModule e DatePipe
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { Consultor } from '../../models/consultor.model';
 import { Router } from '@angular/router';
 import { ConsultorService } from '../consultor.service';
 
 @Component({
   selector: 'app-consultor-list',
-  standalone: true, // Marque o componente como standalone
-  imports: [CommonModule, DatePipe], // Adicione CommonModule e DatePipe aqui
+  standalone: true,
+  imports: [CommonModule, DatePipe, FormsModule], // Add FormsModule here
   templateUrl: './consultor-list.component.html',
   styleUrls: ['./consultor-list.component.css']
 })
 export class ConsultorListComponent implements OnInit {
-
-  // Dados de exemplo (mock)
   consultores: Consultor[] = [];
+  searchTerm: string = '';
 
   constructor(
     private router: Router,
@@ -22,14 +22,31 @@ export class ConsultorListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.consultorService.getConsultores().subscribe({
-      next: (consultores) => {
-        this.consultores = consultores;
-      },
-      error: (error) => {
-        console.error('Erro ao buscar consultores:', error);
-      }
-    });
+    this.filterConsultores(); // Fetch initial data
+  }
+
+  filterConsultores(): void {
+    if (this.searchTerm.trim()) {
+      this.consultorService.getConsultoresFilteredByName(this.searchTerm.trim()).subscribe({
+        next: (data) => {
+          this.consultores = Array.isArray(data) ? data : [data];
+        },
+        error: (error) => {
+          console.error('Erro ao buscar consultores filtrados:', error);
+          this.consultores = []; // Clear list on error
+        }
+      });
+    } else {
+      this.consultorService.getConsultores().subscribe({
+        next: (consultores) => {
+          this.consultores = consultores;
+        },
+        error: (error) => {
+          console.error('Erro ao buscar todos os consultores:', error);
+          this.consultores = []; // Clear list on error
+        }
+      });
+    }
   }
 
   adicionarConsultor(): void {
@@ -38,7 +55,7 @@ export class ConsultorListComponent implements OnInit {
 
   editarConsultor(id: string | undefined): void {
     if (!id) return;
-    this.router.navigate(['/consultores/editar', id]); // Navega para o formulário de edição com o ID
+    this.router.navigate(['/consultores/editar', id]);
   }
 
   excluirConsultor(id: string | undefined): void {
@@ -46,7 +63,7 @@ export class ConsultorListComponent implements OnInit {
     if (confirm('Tem certeza que deseja excluir este consultor?')) {
       this.consultorService.deleteConsultor(id).subscribe({
         next: () => {
-          this.consultores = this.consultores.filter(c => c.id_consultor !== id);
+          this.filterConsultores(); // Re-fetch data after deletion
           console.log(`Consultor com ID: ${id} excluído com sucesso.`);
         },
         error: (error) => {
