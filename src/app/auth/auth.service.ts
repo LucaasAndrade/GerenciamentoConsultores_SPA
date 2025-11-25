@@ -19,6 +19,7 @@ export class AuthService {
   login(credentials: Pick<Administrador, 'login' | 'password'>): Observable<Administrador> {
     return this.http.post<Administrador>(this.apiUrl, credentials).pipe(
       tap(response => {
+        console.log(response)
         if (response && response.id_admin) {
           localStorage.setItem(this.ADMIN_ID_KEY, response.id_admin);
           this.router.navigate(['/consultores']);

@@ -29,8 +29,7 @@ export class AdministradorListComponent implements OnInit {
   }
 
   deleteAdministrador(id: string): void {
-    console.log(this.loggedInAdminId === id)
-    if (id === this.loggedInAdminId) {
+    if (id == this.loggedInAdminId) {
       alert('Você não pode excluir o seu próprio usuário enquanto estiver logado.');
       return;
     }

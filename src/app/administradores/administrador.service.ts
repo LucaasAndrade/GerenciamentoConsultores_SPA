@@ -7,7 +7,7 @@ import { Administrador } from '../models/administrador.model';
   providedIn: 'root'
 })
 export class AdministradorService {
-  private apiUrl = 'http://localhost:3030/api/admin'; // Adjust the URL as needed
+  private apiUrl = '/api/admin'; // Adjust the URL as needed
 
   constructor(private http: HttpClient) { }
 
