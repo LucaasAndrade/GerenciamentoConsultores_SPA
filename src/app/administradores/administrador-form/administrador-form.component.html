@@ -1,26 +1,35 @@
-<div class="form-container">
-  <h2>{{ isEditMode ? 'Editar Administrador' : 'Novo Administrador' }}</h2>
-  <form [formGroup]="administradorForm" (ngSubmit)="onSubmit()">
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title mb-4">{{ isEditMode ? 'Editar Administrador' : 'Novo Administrador' }}</h2>
+      <form [formGroup]="administradorForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-field">
-      <label for="login">Login</label>
-      <input id="login" formControlName="login" placeholder="Digite o login">
-      <div *ngIf="administradorForm.controls['login'].invalid && (administradorForm.controls['login'].dirty || administradorForm.controls['login'].touched)" class="error-message">
-        O login é obrigatório.
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="login" class="form-label">Login</label>
+          <input id="login" formControlName="login" class="form-control"
+                 [ngClass]="{ 'is-invalid': administradorForm.controls['login'].invalid && (administradorForm.controls['login'].dirty || administradorForm.controls['login'].touched) }"
+                 placeholder="Digite o login">
+          <div *ngIf="administradorForm.controls['login'].invalid && (administradorForm.controls['login'].dirty || administradorForm.controls['login'].touched)" class="invalid-feedback">
+            O login é obrigatório.
+          </div>
+        </div>
 
-    <div class="form-field">
-      <label for="password">Senha</label>
-      <input id="password" type="password" formControlName="password" placeholder="Digite a senha">
-      <div *ngIf="administradorForm.controls['password'].invalid && (administradorForm.controls['password'].dirty || administradorForm.controls['password'].touched)" class="error-message">
-        A senha é obrigatória.
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha</label>
+          <input id="password" type="password" formControlName="password" class="form-control"
+                 [ngClass]="{ 'is-invalid': administradorForm.controls['password'].invalid && (administradorForm.controls['password'].dirty || administradorForm.controls['password'].touched) }"
+                 placeholder="Digite a senha">
+          <div *ngIf="administradorForm.controls['password'].invalid && (administradorForm.controls['password'].dirty || administradorForm.controls['password'].touched)" class="invalid-feedback">
+            A senha é obrigatória.
+          </div>
+        </div>
 
-    <div class="form-actions">
-      <button type="submit" [disabled]="administradorForm.invalid">Salvar</button>
-      <button type="button" (click)="onCancel()">Cancelar</button>
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="administradorForm.invalid">Salvar</button>
+        </div>
+
+      </form>
     </div>
-  </form>
+  </div>
 </div>

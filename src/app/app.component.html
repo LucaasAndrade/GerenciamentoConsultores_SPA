@@ -1,11 +1,49 @@
-<div class="main-container">
-  <div class="sidebar" *ngIf="isAuthenticated">
-    <div class="sidebar-header">Admin Panel</div>
-    <a routerLink="/consultores" routerLinkActive="active">Consultores</a>
-    <a routerLink="/administradores" routerLinkActive="active">Administradores</a>
-    <button (click)="logout()" class="logout-button">Logout</button>
+<ng-container *ngIf="!isAuthenticated; else mainApp">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #mainApp>
+  <div class="app-container">
+    <!-- Sidebar for desktop -->
+    <nav class="sidebar d-none d-lg-block">
+      <div class="sidebar-header">
+        <h4>Admin Panel</h4>
+      </div>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" routerLink="/consultores" routerLinkActive="active">Consultores</a>
+        <a class="nav-link" routerLink="/administradores" routerLinkActive="active">Administradores</a>
+      </div>
+      <button (click)="logout()" class="btn btn-danger mt-auto">Logout</button>
+    </nav>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Header for mobile with sidebar toggle -->
+      <header class="d-lg-none p-3 bg-light border-bottom">
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+          Menu
+        </button>
+        <h5 class="ms-3 mb-0">Admin Panel</h5>
+      </header>
+      
+      <main class="p-4">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
-  <div class="content">
-    <router-outlet></router-outlet>
+
+  <!-- Offcanvas Sidebar for mobile -->
+  <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Admin Panel</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" routerLink="/consultores" routerLinkActive="active" (click)="closeOffcanvas()">Consultores</a>
+        <a class="nav-link" routerLink="/administradores" routerLinkActive="active" (click)="closeOffcanvas()">Administradores</a>
+      </div>
+      <button (click)="logout()" class="btn btn-danger mt-auto w-100">Logout</button>
+    </div>
   </div>
-</div>
+</ng-template>

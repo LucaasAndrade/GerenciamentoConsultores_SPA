@@ -1,33 +1,35 @@
-<div class="container">
-  <div class="header">
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Administradores</h1>
-    <a routerLink="/administrador-form" class="add-button">Novo Administrador</a>
+    <a routerLink="/administrador-form" class="btn btn-success">Novo Administrador</a>
   </div>
 
-  <table class="consultor-table">
-    <thead>
-      <tr>
-        <th>Login</th>
-        <th>Data de Criação</th>
-        <th>Último Update</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let administrador of administradores">
-        <td>{{ administrador.login }}</td>
-        <td>{{ administrador.data_criacao | date: 'dd/MM/yyyy' }}</td>
-        <td>{{ administrador.ultimo_update | date: 'dd/MM/yyyy' }}</td>
-        <td class="actions">
-          <a [routerLink]="['/administrador-form', administrador.id_admin]" class="edit-button">Editar</a>
-          <button (click)="deleteAdministrador(administrador.id_admin!)" class="delete-button">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Login</th>
+          <th>Data de Criação</th>
+          <th>Último Update</th>
+          <th class="text-end">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let administrador of administradores">
+          <td>{{ administrador.login }}</td>
+          <td>{{ administrador.data_criacao | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ administrador.ultimo_update | date: 'dd/MM/yyyy' }}</td>
+          <td class="text-end">
+            <a [routerLink]="['/administrador-form', administrador.id_admin]" class="btn btn-primary btn-sm me-2">Editar</a>
+            <button (click)="deleteAdministrador(administrador.id_admin!)" class="btn btn-danger btn-sm">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <div *ngIf="administradores.length === 0" class="empty-state">
-    <p>Nenhum administrador cadastrado.</p>
+  <div *ngIf="administradores.length === 0" class="alert alert-info mt-4" role="alert">
+    Nenhum administrador cadastrado.
   </div>
 </div>
 
