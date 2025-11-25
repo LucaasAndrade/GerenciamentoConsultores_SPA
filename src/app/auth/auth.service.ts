@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Administrador } from '../models/administrador.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/admin/login';
+  private apiUrl = `${environment.apiUrl}/api/admin/login`;
   private readonly ADMIN_ID_KEY = 'id_admin';
 
   constructor(

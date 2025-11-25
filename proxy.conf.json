@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "https://gerenciamento-consultores-app-spa.vercel.app",
-    "secure": true,
-    "changeOrigin": true
-  }
-}
